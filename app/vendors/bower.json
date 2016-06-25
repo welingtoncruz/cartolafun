@@ -27,6 +27,9 @@
     "material-shadows": "~2.0.1",
     "angular": "1.4.9",
     "ngstorage": "ng-storage#^0.4.2",
+	"Waves": "waves#~0.7.4",
+	"jquery-placeholder": "~2.1.2",
+	"oclazyload": "~1.0.9"
   },
   "resolutions": {
     "angular": "1.4.9"
