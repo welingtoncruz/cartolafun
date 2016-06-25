@@ -1,0 +1,102 @@
+<header data-ng-include="'template/header.html'"></header>
+
+<section id="main">
+        <div class="container" ng-init="init()" data-ng-controller="homeCtrl">
+            
+            <div ng-if="totalTimes != 0 && mercado == 2" style="position:absolute;right:10px;top:-20px;z-index:50000">
+                <a href="" style="font-size:38px; padding:10px" ng-click="recalculaPontos()"><i class="tm-icon zmdi zmdi-refresh c-black"></i></a>                   
+            </div>
+
+            
+            <div ng-if="totalTimes == 0" style="position:absolute;right:10px;top:-20px;z-index:50000">
+                <a href="" style="font-size:38px;" data-ui-sref="cartola.teams"><i class="tm-icon zmdi zmdi-account-add c-black"></i></a>
+            </div>
+            <div class="card-body">    
+                <div ng-repeat="team in teams | orderBy:'-team_pontuacao' track by $index"">
+                    <ul class="main-menu">
+                        <li class="sub-menu">
+                            <a href="" toggle-submenu>    
+                                <div id="team_info_wrapper" class="col-lg-12">
+
+                                    <div class="col-lg-1">
+                                        <h4>{{$index+1}}°</h4>
+                                    </div>
+
+                                    <div class="col-lg-6">
+                                        <div id="team_escudo" class="col-lg-4">
+                                            <img ng-src="{{team.url_escudo_png}}">
+                                        </div>
+                                        <div id="team_info" class="col-lg-8">
+                                            <div class="team_nome">
+                                                <h1>{{team.nome}}</h1><h3>{{team.nome_cartola}}</h3>
+                                            </div>
+                                            <div class="team_patrimonio">
+                                                <div class="patrimonio-total">C$ {{team.team_patrimonio.toFixed(2)}}</div> 
+                                                <div class='patrimonio-label'>Patrimônio</div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div id="team_rodada_pontuacao" class="col-lg-5">
+                                        <div class="team_rodada">
+                                            Rodada {{team.team_rodada}}
+                                        </div>
+                                        <div class="team_pontuacao">
+                                            <div ng-class="team.team_pontuacao_css">                    
+                                            {{team.team_pontuacao.toFixed(2)}}</div> 
+                                            <div ng-class="team.pontuacao_label">{{team.pontuacao_label}}</div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </a>
+                            <ul>
+                                <li ng-repeat="athlete in team.athletes | orderBy:'posicao_id'">
+                                    <div class="athlete_wrapper">
+                                            <div class="athlete_clube">
+                                                <img ng-src="{{athlete.clube_escudo45x45}}">
+                                            </div>
+                                            <div class="athlete_foto">
+                                                <img ng-src="{{athlete.atleta_foto140x140}}">
+                                            </div>
+                                            <div class="athlete_apelido_label">
+                                                <span class="athlete_status" data-toggle="tooltip" data-placement="bottom" title="athlete.athlete_status_label"><img ng-src="{{athlete.athlete_status_image}}"></span>
+                                                <span>{{athlete.apelido}}</span>
+                                            </div>
+                                            <div class="athlete_posicao_label">
+                                                 {{athlete.athlete_posicao}}
+                                            </div>
+                                        <div class="statistics_wrapper">
+                                            <div class="statistics">
+                                                <span class="athlete_val">C$ {{athlete.athlete_preco}}</span>
+                                                <span class="athlete_label">Preço</span>
+                                            </div>
+                                            <div class="statistics">
+                                                <span ng-class="athlete.athlete_preco_variacao_css">{{athlete.athlete_preco_variacao}}</span>
+                                                <span class="athlete_label" title="Variação (C$)">Var.(C$)</span>
+                                            </div>
+                                            <div class="statistics">
+                                                <span ng-class="athlete.athlete_media_css">{{athlete.athlete_media}}</span>
+                                                <span class="athlete_label" title="Pontuação média">Média</span>
+                                            </div>
+                                            <div ng-class="team.statistics_css">
+                                                <span ng-class="athlete.athlete_pontos_css">{{athlete.athlete_pontos}}</span>
+                                                <span class="athlete_label">{{athlete.athlete_pontos_label}}</span>
+                                            </div>
+                                            <div class="statistics">
+                                                <span class="athlete_val">{{athlete.athlete_jogos}}</span>
+                                                <span class="athlete_label">Jogos</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul> 
+                        </li>
+                    </ul>    
+                </div>
+            </div>
+        </div>
+    </section>
+</section>
+
+<footer id="footer" data-ng-include="'template/footer.html'"></footer>

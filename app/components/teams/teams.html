@@ -1,0 +1,65 @@
+<header data-ng-include="'template/header.html'"></header>
+
+<section id="main">
+    <div class="container" ng-init="init()" data-ng-controller="teamsCtrl">
+
+        <div style="width:100%;height:10px; padding:15px;">                  
+        </div>
+        <span><h3 class="c-black"><i class="tm-icon zmdi zmdi-star"></i>  Favoritos</h3></span>
+
+        <div class="card">
+
+
+            <div class="card-body card-padding">
+                <div class="row">
+                    <div class="form-group fg-toggled">
+                        <div class="fg-line" style="width:300px;">
+                            <span class="fg-label">Adicionar Time</span>
+                            <input type="text" id="timeSelecionado" ng-model="timeSelecionado" placeholder="Pesquisar..." ng-model-options="modelOptions" uib-typeahead="time as time.nome for time in getTimes($viewValue)" typeahead-on-select="showTime($item)" typeahead-no-results="noResults" class="form-control fg-input" required">
+                        </div>  
+                    </div>             
+                    <div class="col-lg-12" ng-show="mostrarTime">
+                        <div id="addTime" class="col-lg-1 pull-right">
+                            <a href="" style="font-size:36px;" ng-click="adicionar(timeSelecionado)"><i class="tm-icon zmdi zmdi-account-add c-black"></i></a>
+                        </div>
+                        <div id="team_escudo">
+                            <img ng-src="{{timeSelecionado.url_escudo_png}}">
+                        </div>
+                        <div id="team_info" class="col-lg-11">
+                            <div class="team_nome">
+                                <h1>{{timeSelecionado.nome}}</h1>
+                                <h3>{{timeSelecionado.nome_cartola}}</h3>
+                                <h5>{{timeSelecionado.slug}}</h5>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div ng-show="noResults">
+                      <i class="glyphicon glyphicon-remove"></i> Nenhum time encontrado.
+                    </div>
+                </div>    
+            </div>
+        </div>
+
+            <div class="card-body">
+                <div class="result card row" style="padding:10px;" ng-repeat="team in teams | orderBy:'slug' track by $index"">
+                        <div class="col-lg-1 pull-right">
+                            <a href="" style="font-size:36px;" ng-click="remover(team)"><i class="tm-icon zmdi zmdi-close-circle c-black"></i></a>
+                        </div>
+                        <div id="team_escudo">
+                            <img ng-src="{{team.url_escudo_png}}">
+                        </div>
+                        <div id="team_info" class="col-lg-11">
+                            <div class="team_nome">
+                                <h1>{{team.nome}}</h1>
+                                <h3>{{team.nome_cartola}}</h3>
+                                <h5>{{team.slug}}</h5>
+                            </div>
+                        </div>
+                </div>
+            </div>
+        </div>    
+    </div>
+</section>
+
+<footer id="footer" data-ng-include="'template/footer.html'"></footer>

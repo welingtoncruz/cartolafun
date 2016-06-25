@@ -1,0 +1,8 @@
+/.project
+/node_modules
+/dist
+/.tmp
+/app/vendors/bower_components
+/nbproject
+/nbproject/project
+*.bak
